@@ -18,6 +18,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['content'])) {
     exit();
 }
 
+if (!isset($_SESSION['liked_posts'])) {
+    $_SESSION['liked_posts'] = [];
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['like_post'])) {
+    $postIndex = $_POST['like_post'];
+
+    // Toggle like
+    if (in_array($postIndex, $_SESSION['liked_posts'])) {
+        $_SESSION['liked_posts'] = array_diff($_SESSION['liked_posts'], [$postIndex]);
+    } else {
+        $_SESSION['liked_posts'][] = $postIndex;
+    }
+
+    header("Location: beranda.php");
+    exit();
+}
+
 $queryFetchStatus = '
     SELECT p.content, p.create_at, u.username AS author
     FROM postingan p
@@ -36,6 +54,8 @@ $resultStatus = pg_query($conn, $queryFetchStatus);
     <meta charset="UTF-8">
     <title>Home / X Clone</title>
     <link rel="stylesheet" href="beranda.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -92,12 +112,32 @@ $resultStatus = pg_query($conn, $queryFetchStatus);
                     <div class="col-lg-12">
                         <?php
                         if (pg_num_rows($resultStatus) > 0) {
+                            $i = 0;
                             while ($row = pg_fetch_assoc($resultStatus)) {
+                                $isLiked = in_array($i, $_SESSION['liked_posts']);
+
                                 echo '<div class="post">';
                                 echo '<p><b>' . htmlspecialchars($row["author"]) . '</b><br>';
                                 echo nl2br(htmlspecialchars($row["content"])) . '<br>';
-                                echo '<a href="#">Like</a> - <a href="#">Comment</a></p>';
+                                echo '<div class="post-actions">';
+
+                                // Like form
+                                echo '<form method="POST" style="display:inline">';
+                                echo '<input type="hidden" name="like_post" value="' . $i . '">';
+                                echo '<button type="submit" class="like-btn">';
+                                echo '<i class="' . ($isLiked ? 'fa-solid' : 'fa-regular') . ' fa-heart ' . ($isLiked ? 'liked' : '') . '"></i>';
+                                echo '</button>';
+                                echo '</form>';
+
+                                // Comment icon (static)
+                                echo '<i class="fa-regular fa-comment"></i>';
+
+                                echo '</div></p>';
                                 echo '<hr></div>';
+
+                                $i++;
+
+
                             }
                         } else {
                             echo "<center><p>Tidak ada status untuk ditampilkan</p></center>";

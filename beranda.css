@@ -247,6 +247,38 @@ body {
     font-size: 16px;
 }
 
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 8px;
+}
+
+.post-actions form,
+.post-actions i {
+    display: flex;
+    align-items: center;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.like-btn i {
+    font-size: 18px;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.like-btn i.liked {
+    color: red;
+}
+
 /* === RIGHTBAR === */
 .rightbar {
     width: 350px;
