@@ -1,7 +1,7 @@
 body {
     background-color: #000;
     font-family: Arial, sans-serif;
-    color: #fff;
+    color: white;
     height: 100vh;
     display: flex;
     justify-content: flex-start;
@@ -82,6 +82,7 @@ body {
 .create-account {
     background-color: #1d9bf0;
     color: #fff;
+    width: 92%;
 }
 .textCreateAccount {
     color: white;
@@ -165,10 +166,85 @@ body {
   color: #1da1f2;
   border: 1px solid #333;
   border-radius: 25px;
-  padding: 10px 20px;
+  padding: 10px 0px;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
   width: 150%;
   text-align: center;
 }
+
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+  }
+  
+  /* Show modal when URL has #signinModal */
+  .modal:target {
+    display: block;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #111;
+    margin: 10% auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    color: white;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  }
+  
+  /* Close Button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    text-decoration: none;
+    color: #aaa;
+    font-size: 24px;
+  }
+  
+  .close:hover {
+    color: white;
+  }
+  
+  /* Input Fields */
+  .modal-content input {
+    width: 93%;
+    padding: 10px;
+    margin: 10px 0;
+    background: #222;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 5px;
+    justify-content: center;
+  }
+  
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #1DA1F2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .error-msg {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
