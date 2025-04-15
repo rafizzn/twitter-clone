@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = koneksidb();
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $remember = isset($_POST['remember']); // checkbox
+    $remember = isset($_POST['remember']);
 
     $query = 'SELECT * FROM "user" WHERE username = $1';
     $result = pg_query_params($conn, $query, [$username]);
@@ -14,9 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result && $data = pg_fetch_assoc($result)) {
         if ($password === $data['password']) {
             $_SESSION['username'] = $username;
-            $_SESSION['user_id'] = $data['id']; // ✅ Set user ID in session for use in beranda.php
+            $_SESSION['user_id'] = $data['id'];
 
-            // If "remember me" is checked, set cookie
             if ($remember) {
                 setcookie('username', $username, time() + (86400 * 30), "/"); // 30 days
                 setcookie('password', $password, time() + (86400 * 30), "/"); // Not secure for production
@@ -34,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     pg_close($conn);
 }
 
-// Page variables
+
 $header = "Happening now";
 $header2 = "Join today.";
 $snk = "By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.";

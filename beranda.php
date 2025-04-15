@@ -4,7 +4,6 @@ session_start();
 
 $conn = koneksidb();
 
-// Handle post submission
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['content'])) {
     $content = trim($_POST['content']);
 
@@ -15,13 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['content'])) {
         pg_query_params($conn, $queryInsert, [$userId, $content]);
     }
 
-    // 🚨 Redirect to prevent form resubmission on refresh
     header("Location: beranda.php");
     exit();
 }
 
-
-// Fetch posts
 $queryFetchStatus = '
     SELECT p.content, p.create_at, u.username AS author
     FROM postingan p
@@ -69,49 +65,48 @@ $resultStatus = pg_query($conn, $queryFetchStatus);
                 </div>
             </div>
         </aside>
-<div class="main-content">
-        <!-- Feed -->
-        <main class="feed">
-            <div class="feed-header">
-                <span class="active-tab">For you</span>
-                <span>Following</span>
-            </div>
+        <div class="main-content">
 
-            <!-- Tweet Box -->
-            <form class="tweet-box" method="POST" action="beranda.php">
-                <input type="text" name="content" placeholder="What's happening?" required>
-                <div class="tweet-box-wrapper">
-                    <div class="tweet-tools">
-                        <div>📷</div>
-                        <div>🎞</div>
-                        <div>📊</div>
-                        <div>😊</div>
-                        <div>📅</div>
-                        <div>📍</div>
+            <!-- Feed -->
+            <main class="feed">
+                <div class="feed-header">
+                    <span class="active-tab">For you</span>
+                    <span>Following</span>
+                </div>
+                <form class="tweet-box" method="POST" action="beranda.php">
+                    <input type="text" name="content" placeholder="What's happening?" required>
+                    <div class="tweet-box-wrapper">
+                        <div class="tweet-tools">
+                            <div>📷</div>
+                            <div>🎞</div>
+                            <div>📊</div>
+                            <div>😊</div>
+                            <div>📅</div>
+                            <div>📍</div>
+                        </div>
+                        <button type="submit" class="tweet-btn">Post</button>
                     </div>
-                    <button type="submit" class="tweet-btn">Post</button>
-                </div>
-            </form>
+                </form>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php
-                    if (pg_num_rows($resultStatus) > 0) {
-                        while ($row = pg_fetch_assoc($resultStatus)) {
-                            echo '<div class="post">';
-                            echo '<p><b>' . htmlspecialchars($row["author"]) . '</b><br>';
-                            echo nl2br(htmlspecialchars($row["content"])) . '<br>';
-                            echo '<a href="#">Like</a> - <a href="#">Comment</a></p>';
-                            echo '<hr></div>';
+                <div class="row">
+                    <div class="col-lg-12">
+                        <?php
+                        if (pg_num_rows($resultStatus) > 0) {
+                            while ($row = pg_fetch_assoc($resultStatus)) {
+                                echo '<div class="post">';
+                                echo '<p><b>' . htmlspecialchars($row["author"]) . '</b><br>';
+                                echo nl2br(htmlspecialchars($row["content"])) . '<br>';
+                                echo '<a href="#">Like</a> - <a href="#">Comment</a></p>';
+                                echo '<hr></div>';
+                            }
+                        } else {
+                            echo "<center><p>Tidak ada status untuk ditampilkan</p></center>";
                         }
-                    } else {
-                        echo "<center><p>Tidak ada status untuk ditampilkan</p></center>";
-                    }
-                    ?>
+                        ?>
+                    </div>
                 </div>
-            </div>
-        </main>
-    </div>
+            </main>
+        </div>
 
         <!-- Right Sidebar -->
         <aside class="rightbar">

@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($username) && !empty($email) && !empty($pass)) {
         $sql = 'INSERT INTO "user" (username, email, password, create_at) VALUES ($1, $2, $3, NOW())';
-        $stmt = uniqid('stmt_'); // unique statement name
+        $stmt = uniqid('stmt_');
         pg_prepare($conn, $stmt, $sql);
         $result = pg_execute($conn, $stmt, array($username, $email, $pass));
         $message = $result ? "Registrasi berhasil!" : "Registrasi gagal: " . pg_last_error($conn);
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="main.php">
                 <img src="img/back.png" alt="back">
             </a>
-        </div> 
+        </div>
 
         <img class="tweet" src="img/twitter.png" alt="logo twitter">
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php if (!empty($error)): ?>
                 <p class="error-msg"><?= $error ?></p>
             <?php endif; ?>
-            
+
             <?php if (!empty($success)): ?>
                 <p class="success-msg"><?= $success ?></p>
             <?php endif; ?>

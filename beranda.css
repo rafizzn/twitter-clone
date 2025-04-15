@@ -23,7 +23,7 @@ body {
 .main-content {
     display: flex;
     flex: 1;
-    margin-left: 280px; /* to account for fixed sidebar */
+    margin-left: 280px; 
     max-width: calc(100% - 280px);
     overflow: hidden;
 }
@@ -32,7 +32,6 @@ body {
 .sidebar {
     width: 280px;
     padding: 20px 30px;
-    /* remove left/right padding */
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -40,7 +39,6 @@ body {
     background-color: #000;
     border-right: 1px solid #2f3336;
     justify-content: space-between;
-    /* push post & user box down */
 }
 
 .sidebar nav ul li img {
@@ -75,7 +73,6 @@ body {
     transition: background 0.2s ease-in-out;
     border-radius: 30px;
     padding: 8px;
-    /* instead of 10px */
 }
 
 .sidebar nav ul li:hover {

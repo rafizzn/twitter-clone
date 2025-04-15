@@ -7,7 +7,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     overflow: hidden;
-    padding-left: 50vw; /* This aligns content to right third */
+    padding-left: 50vw; 
 }
 
 .grid-container {
@@ -22,8 +22,8 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding-left: 90px; /* More space from right edge */
-    padding-right: 40px; /* Add padding on inner side */
+    padding-left: 90px; 
+    padding-right: 40px;
     box-sizing: border-box;
     max-width: 400px;
 }
@@ -31,7 +31,7 @@ body {
 .headline {
     font-size: 48px;
     font-weight: 900;
-    white-space: nowrap; /* ✅ Force headline to stay in one line */
+    white-space: nowrap; 
     margin: 0 0 10px 0;
 }
 
@@ -174,7 +174,7 @@ body {
   text-align: center;
 }
 
-/* Modal Background */
+
 .modal {
     display: none;
     position: fixed;
@@ -186,12 +186,10 @@ body {
     background-color: rgba(0,0,0,0.8);
   }
   
-  /* Show modal when URL has #signinModal */
   .modal:target {
     display: block;
   }
   
-  /* Modal Content */
   .modal-content {
     background-color: #111;
     margin: 10% auto;
@@ -203,7 +201,6 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.6);
   }
   
-  /* Close Button */
   .close {
     position: absolute;
     top: 10px;
@@ -217,7 +214,6 @@ body {
     color: white;
   }
   
-  /* Input Fields */
   .modal-content input {
     width: 93%;
     padding: 10px;

@@ -9,7 +9,8 @@ $dbname = 'x';
 $user = 'postgres';
 $password = '1sampai8';
 
-function koneksidb() {
+function koneksidb()
+{
     global $host, $port, $dbname, $user, $password;
     $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
     if (!$conn) {
